@@ -1,5 +1,3 @@
-# 🧪 Testes automatizados: https://github.com/rebvisconti/petcare-sql-tests
-
 # 🐾 PetCare SQL QA
 ![Node.js](https://img.shields.io/badge/Node.js-backend-339933?logo=node.js&logoColor=white&style=for-the-badge)
 ![SQLite](https://img.shields.io/badge/SQLite-database-003B57?logo=sqlite&logoColor=white&style=for-the-badge)
@@ -195,6 +193,12 @@ Use as queries do **Módulo 08** para validar ações no sistema:
 - [Playwright](https://playwright.dev/) — automação E2E
 - [Postman](https://www.postman.com/) — testar a API manualmente
 
+---
+
+## 🧪 Testes automatizados: 
+```
+https://github.com/rebvisconti/petcare-sql-tests
+```
 ---
 
 ## 🤝 Contribuições
