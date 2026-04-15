@@ -1,9 +1,9 @@
-🧪 Testes automatizados: https://github.com/rebvisconti/petcare-sql-tests
+# 🧪 Testes automatizados: https://github.com/rebvisconti/petcare-sql-tests
 
 # 🐾 PetCare SQL QA
 ![Node.js](https://img.shields.io/badge/Node.js-backend-339933?logo=node.js&logoColor=white&style=for-the-badge)
 ![SQLite](https://img.shields.io/badge/SQLite-database-003B57?logo=sqlite&logoColor=white&style=for-the-badge)
-![JavaScript](https://img.shields.io/badge/JavaScript-59.4%25-F7DF1E?logo=javascript&logoColor=black&style=for-the-badge)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black&style=for-the-badge)
 ![SQL](https://img.shields.io/badge/SQL-queries-blue?style=for-the-badge)
 ![API](https://img.shields.io/badge/API-REST-informational?style=for-the-badge)
 ![Tests](https://img.shields.io/badge/testing-QA%20focused-success?style=for-the-badge)
