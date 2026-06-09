@@ -1,16 +1,21 @@
-🧪 Testes automatizados: https://github.com/rebvisconti/petcare-sql-tests
+# 🧪 Testes automatizados: https://github.com/rebvisconti/petcare-sql-tests
 
 # 🐾 PetCare SQL QA
 ![Node.js](https://img.shields.io/badge/Node.js-backend-339933?logo=node.js&logoColor=white&style=for-the-badge)
 ![SQLite](https://img.shields.io/badge/SQLite-database-003B57?logo=sqlite&logoColor=white&style=for-the-badge)
-![JavaScript](https://img.shields.io/badge/JavaScript-59.4%25-F7DF1E?logo=javascript&logoColor=black&style=for-the-badge)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black&style=for-the-badge)
 ![SQL](https://img.shields.io/badge/SQL-queries-blue?style=for-the-badge)
 ![API](https://img.shields.io/badge/API-REST-informational?style=for-the-badge)
 ![Tests](https://img.shields.io/badge/testing-QA%20focused-success?style=for-the-badge)
 ![Database](https://img.shields.io/badge/database-real%20data-important?style=for-the-badge)
 ![Practice](https://img.shields.io/badge/purpose-hands--on%20lab-blueviolet?style=for-the-badge)
 
-API REST do sistema de agendamento PetCare com banco de dados **SQLite real**, desenvolvida para prática de automação de testes e queries SQL.
+API REST + banco de dados SQLite + frontend do PetCare — tudo em um único servidor Node.js.
+
+Desenvolvido para **prática de automação de testes** com Playwright, Cypress, Postman, Bruno e validações SQL.
+
+✅ Este é o repositório principal do ecossistema PetCare.
+Com apenas um `npm start`, o frontend, a API e o banco de dados ficam disponíveis para testes.
 
 ---
 
@@ -18,28 +23,30 @@ API REST do sistema de agendamento PetCare com banco de dados **SQLite real**, d
 
 Este projeto foi desenvolvido para simular um ambiente real de testes, permitindo:
 
-- Validação de API REST com dados persistentes
-- Execução de queries SQL para validação de backend
-- Testes E2E integrando frontend + API + banco
-- Prática de cenários reais de QA (CRUD, validações, consistência de dados)
+- Testes de API REST com dados persistentes
+- Validação de dados diretamente no banco SQLite
+- Testes End-to-End envolvendo frontend, API e banco
+- Criação de automações com Playwright, Cypress ou Robot Framework
+- Prática de consultas SQL aplicadas ao contexto de QA
+- Execução de cenários completos de CRUD e regras de negócio
 
 ---
 
-## ✨ O que tem de novo nesta versão
+## ✨ O que roda neste projeto
 
-- **Banco de dados SQLite** — dados persistem entre restarts do servidor
-- **Tabela de pets separada** — permite praticar JOINs reais
-- **Novo endpoint** `GET /pets` — lista todos os pets cadastrados
-- **8 módulos progressivos de queries SQL** (do básico ao avançado, com foco em validação de testes)
-- **Script de reset** — volta o banco ao estado inicial com um comando
+- **Frontend completo** — login, CRUD de agendamentos, filtros (servido via `express.static`)
+- **API REST** — todos os endpoints documentados via Swagger UI
+- **Banco SQLite real** — dados persistem entre restarts
+- **Logs estruturados** — Winston com arquivos `logs/app.log` e `logs/error.log`
 
 ---
 
 ## 🛠️ Tecnologias
 
 - Node.js, Express, CORS
-- **better-sqlite3** — banco SQLite síncrono e rápido
-- Swagger UI Express, Swagger JSDoc
+- `better-sqlite3` — banco SQLite síncrono
+- Swagger UI Express + Swagger JSDoc
+- Winston — logs estruturados
 
 ---
 
@@ -52,9 +59,24 @@ Este projeto foi desenvolvido para simular um ambiente real de testes, permitind
 
 ---
 
+## 🏗️ Arquitetura
+
+```text
+Frontend
+    │
+    ▼
+Express Server
+    │
+    ├── API REST
+    ├── Swagger
+    └── SQLite
+```
+Todo o sistema é servido através do mesmo servidor Node.js na porta `3002`.
+Não é necessário iniciar frontend e backend separadamente.
+
 ## 🚀 Como rodar
 
-**1. Instale as dependências:**
+**1. Instale as dependências** (só na primeira vez):
 ```bash
 npm install
 ```
@@ -63,21 +85,26 @@ npm install
 ```bash
 npm start
 ```
+---
 
-O banco é criado automaticamente na primeira execução com 10 pets e 12 agendamentos de exemplo!
-
-**3. Acesse:**
+**3. Acesse no navegador:**
 
 | O que acessar | Endereço |
 |---|---|
-| Swagger UI | http://localhost:3002/docs |
-| JSON para Postman | http://localhost:3002/docs.json |
+| Sistema completo (login + agendamentos) | http://localhost:3002 |
+| Swagger UI (documentação interativa) | http://localhost:3002/docs |
+| JSON para importar no Postman/Bruno | http://localhost:3002/docs.json |
 
-**4. Para resetar o banco:**
-```bash
-npm run reset-db
-npm start
-```
+---
+
+> ⚠️ Mantenha o terminal aberto enquanto estiver testando! 
+O banco SQLite é criado automaticamente na primeira execução e carregado com dados de exemplo (10 pets e 12 agendamentos).
+
+> 🔄 **Para resetar os dados:**
+> ```bash
+> npm run reset-db
+> npm start
+> ```
 
 ---
 
@@ -87,10 +114,8 @@ npm start
 petcare-sql-qa/
 ├── database/
 │   ├── schema.sql          # Estrutura das tabelas
-│   ├── seed.sql            # Dados de exemplo
+│   ├── seed.sql            # Dados de exemplo (10 pets, 12 agendamentos)
 │   └── petcare.db          # Banco SQLite (gerado automaticamente)
-├── queries/
-│   └── petcare-queries.sql # 8 módulos de queries para praticar
 ├── routes/
 │   ├── auth.js             # POST /auth/login
 │   ├── agendamentos.js     # CRUD /agendamentos
@@ -98,12 +123,15 @@ petcare-sql-qa/
 │   └── estatisticas.js     # GET /estatisticas
 ├── src/
 │   ├── db.js               # Conexão SQLite + operações
-│   └── validacao.js        # Regras de validação
-├── server.js               # Servidor Express + Swagger
+│   ├── validacao.js        # Regras de validação dos endpoints
+│   ├── logger.js           # Configuração Winston
+│   └── middleware/
+│       └── httpLogger.js   # Middleware de log HTTP
+├── logs/                   # Logs gerados (ignorado pelo Git)
+├── server.js               # Servidor Express + Swagger + frontend estático
 ├── package.json
 └── README.md
 ```
-
 ---
 
 ## 📡 Endpoints da API
@@ -192,8 +220,20 @@ Use as queries do **Módulo 08** para validar ações no sistema:
 ## 🚀 Ferramentas sugeridas
 
 - [DB Browser for SQLite](https://sqlitebrowser.org/) — visualizar e editar o banco
-- [Playwright](https://playwright.dev/) — automação E2E
-- [Postman](https://www.postman.com/) — testar a API manualmente
+- [Playwright](https://playwright.dev/) — frontend e API
+- [Cypress](https://www.cypress.io/) — frontend e API
+- [Postman](https://www.postman.com/) / [Bruno](https://www.usebruno.com/) — API
+- [Robot Framework](https://robotframework.org/) + Browser Library
+
+---
+
+## 🗂️ Ecossistema PetCare
+
+| Repositório | Descrição | Porta |
+|---|---|---|
+| **petcare-qa** | Código-fonte do frontend | servido aqui |
+| **petcare-sql-qa** | API REST + SQLite + Frontend (este repo) | `3002` |
+| **petcare-sql-tests** | Playwright 38 testes | — |
 
 ---
 

@@ -8,7 +8,13 @@
     "dev": "node --watch server.js",
     "reset-db": "node -e \"require('fs').existsSync('./database/petcare.db') && require('fs').unlinkSync('./database/petcare.db'); console.log('Banco resetado!');\""
   },
-  "keywords": ["qa", "sqlite", "sql", "playwright", "testes"],
+  "keywords": [
+    "qa",
+    "sqlite",
+    "sql",
+    "playwright",
+    "testes"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -16,6 +22,7 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.0"
+    "swagger-ui-express": "^5.0.0",
+    "winston": "^3.19.0"
   }
 }

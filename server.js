@@ -12,6 +12,9 @@ const agendamentosRoutes = require('./routes/agendamentos');
 const petsRoutes         = require('./routes/pets');
 const estatisticasRoutes = require('./routes/estatisticas');
 
+const logger         = require('./src/logger');
+const { httpLogger } = require('./src/middleware/httpLogger');
+
 const app  = express();
 const PORT = 3002;
 
@@ -21,6 +24,13 @@ inicializar();
 // ── Middlewares ────────────────────────────────
 app.use(cors());
 app.use(express.json());
+app.use(httpLogger);
+const path = require('path');
+app.use(express.static(path.join(__dirname, '../petcare-qa/public')));
+
+app.get('/', (_req, res) => {
+  res.sendFile(path.join(__dirname, '../petcare-qa/public', 'login.html'));
+});
 
 // ── Swagger ────────────────────────────────────
 const swaggerOptions = {
@@ -72,13 +82,10 @@ app.use('/estatisticas', estatisticasRoutes);
 
 // ── Start ──────────────────────────────────────
 app.listen(PORT, () => {
-  console.log('');
-  console.log('  🐾  PetCare SQL QA rodando!');
-  console.log(`  ➜  API:   http://localhost:${PORT}`);
-  console.log(`  ➜  Docs:  http://localhost:${PORT}/docs`);
-  console.log(`  ➜  JSON:  http://localhost:${PORT}/docs.json`);
-  console.log('  ➜  DB:    database/petcare.db');
-  console.log('');
+  logger.info('🐾 PetCare SQL QA rodando!');
+  logger.info(`API   → http://localhost:${PORT}`);
+  logger.info(`Docs  → http://localhost:${PORT}/docs`);
+  logger.info(`DB    → database/petcare.db`);
 });
 
 module.exports = app;
