@@ -237,6 +237,12 @@ Use as queries do **Módulo 08** para validar ações no sistema:
 
 ---
 
+## 🧪 Testes automatizados: 
+```
+https://github.com/rebvisconti/petcare-sql-tests
+```
+---
+
 ## 🤝 Contribuições
 
 Sinta-se à vontade para enviar sugestões, correções e melhorias através de pull requests.
